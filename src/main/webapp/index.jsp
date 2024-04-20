@@ -36,12 +36,15 @@
     UserRepo userRepo = new UserRepo();
     Object object = request.getSession().getAttribute("currentUser");
     User cookieUser = null;
-    for (Cookie cookie : request.getCookies()) {
-        if (cookie.getName().equals("userId")) {
-            UUID userId = UUID.fromString(cookie.getValue());
-            cookieUser = userRepo.findById(userId);
+    if(request.getCookies()!=null){
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("userId")) {
+                UUID userId = UUID.fromString(cookie.getValue());
+                cookieUser = userRepo.findById(userId);
+            }
         }
     }
+
 
 
 
